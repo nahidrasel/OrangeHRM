@@ -7,7 +7,7 @@ namespace OrangeHRM.pageObjects
 {
     public class LoginPage
     {
-        private IWebDriver driver;
+        private readonly IWebDriver driver;
         public LoginPage(IWebDriver driver)
         {
             this.driver = driver;
@@ -15,38 +15,38 @@ namespace OrangeHRM.pageObjects
         }
 
         [FindsBy(How = How.Id, Using = "txtUsername")]
-        private IWebElement username;
+        private readonly IWebElement username;
 
         [FindsBy(How = How.Id, Using = "txtPassword")]
-        private IWebElement password;
+        private readonly IWebElement password;
 
         [FindsBy(How = How.Id, Using = "btnLogin")]
-        private IWebElement loginbutton;
+        private readonly IWebElement loginbutton;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='divLogo']/img")]
-        private IWebElement loginpagelogo;
+        private readonly IWebElement loginpagelogo;
 
-        public DashboardPage validLogin(string userId,string pass)
+        public DashboardPage ValidLogin(string userId,string pass)
         {
             username.SendKeys(userId);
             password.SendKeys(pass);
             loginbutton.Click();
             return new DashboardPage(driver);
         }
-        public IWebElement loginWebPage()
+        public IWebElement LoginWebPage()
         {
             return loginpagelogo;
         }
 
-        public IWebElement getUserName()
+        public IWebElement GetUserName()
         {
             return username;
         }
-        public IWebElement getPassword()
+        public IWebElement GetPassword()
         {
             return password;
         }
-        public IWebElement loginButton()
+        public IWebElement LoginButton()
         {
             return loginbutton;
         }
