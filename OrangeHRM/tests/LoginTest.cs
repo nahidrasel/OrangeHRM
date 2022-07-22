@@ -1,24 +1,29 @@
 ﻿using NUnit.Framework;
 using OrangeHRM.utilities;
 using OrangeHRM.pageObjects;
+using OrangeHRM.utilities.mylogger;
+using OpenQA.Selenium;
 
 namespace OrangeHRM
 {
     public class LoginTest : Base
     {
-        //UserData admin = TestUserProvider.TestUsers.AdminUser;
-
+        
         [Test, TestCaseSource("AddTestDataConfig")]
         //[TestCase("Admin","admin123")]
-        public void Login(String username,string password)
+        public void Login(string username,string password)
         {
+            //var logger = new SimpleLogger();
+            var logger = new Logger();
+            logger.Log("Username and password Input");
 
-            //Log.Info("Username Input");
             LoginPage loginpage = new(GetDriver());
+
+            logger.Log("Login Page Validation");
             Assert.IsTrue(loginpage.LoginWebPage().Displayed, "ORM Website");
             DashboardPage dashboardPage = loginpage.ValidLogin(username, password);
 
-            //Log.Info("click on the login button and verify dashboard page");
+            logger.Log("Dashboard page Validation");
             Assert.IsTrue(dashboardPage.validDashboardPage().Displayed, "Dashboard is displayed");
 
         }
