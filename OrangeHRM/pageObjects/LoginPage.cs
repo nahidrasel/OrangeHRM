@@ -17,13 +17,13 @@ namespace OrangeHRM.pageObjects
         [FindsBy(How = How.Id, Using = "txtUsername")]
         private readonly IWebElement username;
 
-        [FindsBy(How = How.Id, Using = "txtPassword")]
+        [FindsBy(How = How.XPath, Using = "//input[@id='txtPassword']")]
         private readonly IWebElement password;
 
-        [FindsBy(How = How.Id, Using = "btnLogin")]
+        [FindsBy(How = How.CssSelector, Using = "#btnLogin")]
         private readonly IWebElement loginbutton;
 
-        [FindsBy(How = How.XPath, Using = "//*[@id='divLogo']/img")]
+        [FindsBy(How = How.XPath, Using = "//div[@id='divLogo']//img")]
         private readonly IWebElement loginpagelogo;
 
         public DashboardPage ValidLogin(string userId,string pass)

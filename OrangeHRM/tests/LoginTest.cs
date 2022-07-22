@@ -13,7 +13,6 @@ namespace OrangeHRM
         //[TestCase("Admin","admin123")]
         public void Login(string username,string password)
         {
-            //var logger = new SimpleLogger();
             var logger = new Logger();
             logger.Log("Username and password Input");
 
@@ -24,7 +23,7 @@ namespace OrangeHRM
             DashboardPage dashboardPage = loginpage.ValidLogin(username, password);
 
             logger.Log("Dashboard page Validation");
-            Assert.IsTrue(dashboardPage.validDashboardPage().Displayed, "Dashboard is displayed");
+            Assert.IsTrue(dashboardPage.ValidDashboardPage().Displayed, "Dashboard is displayed");
 
         }
         public static IEnumerable <TestCaseData> AddTestDataConfig()

@@ -11,7 +11,7 @@ namespace OrangeHRM.pageObjects
     public class DashboardPage
     {
 
-        private IWebDriver driver;
+        private readonly IWebDriver driver;
         public DashboardPage(IWebDriver driver)
         {
             this.driver = driver;
@@ -19,9 +19,9 @@ namespace OrangeHRM.pageObjects
         }
 
         [FindsBy(How = How.Id, Using = "welcome")]
-        private IWebElement dashboardPage;
+        private readonly IWebElement dashboardPage;
 
-        public IWebElement validDashboardPage()
+        public IWebElement ValidDashboardPage()
         {
             return dashboardPage;
         }
