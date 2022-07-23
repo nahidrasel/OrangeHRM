@@ -24,7 +24,6 @@ namespace OrangeHRM
 
             logger.Log("Dashboard page Validation");
             Assert.IsTrue(dashboardPage.ValidDashboardPage().Displayed, "Dashboard is displayed");
-
         }
         public static IEnumerable <TestCaseData> AddTestDataConfig()
         {

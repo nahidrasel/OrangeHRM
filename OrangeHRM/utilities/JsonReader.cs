@@ -8,7 +8,7 @@ namespace OrangeHRM.utilities
     {
         public string extractData(String tokenName)
         {
-            String myJsonString = File.ReadAllText("utilities/TestData.json");
+            String myJsonString = File.ReadAllText("TestData/TestData.json");
 
             var jsonObject = JToken.Parse(myJsonString);
             return jsonObject.SelectToken(tokenName).Value<string>();
