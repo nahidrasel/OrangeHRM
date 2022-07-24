@@ -1,35 +1,26 @@
 ﻿using NUnit.Framework;
-using OrangeHRM.utilities;
-using OrangeHRM.pageObjects;
-using OrangeHRM.utilities.mylogger;
-using OpenQA.Selenium;
+using OrangeHRM.PageObjects;
+using OrangeHRM.Tests;
 
 namespace OrangeHRM
 {
-    public class LoginTest : Base
+    public class LoginTest : BaseTest
     {
-        
+        private LoginPage _loginPage;
+
         [Test, TestCaseSource("AddTestDataConfig")]
         //[TestCase("Admin","admin123")]
         public void Login(string username,string password)
         {
-            var logger = new Logger();
-            logger.Log("Username and password Input");
-
-            LoginPage loginpage = new(GetDriver());
-
-            logger.Log("Login Page Validation");
-            Assert.IsTrue(loginpage.LoginWebPage().Displayed, "ORM Website");
-            DashboardPage dashboardPage = loginpage.ValidLogin(username, password);
-
-            logger.Log("Dashboard page Validation");
-            Assert.IsTrue(dashboardPage.ValidDashboardPage().Displayed, "Dashboard is displayed");
+            _loginPage = new LoginPage(driver) ;
+            Assert.IsTrue(_loginPage.LoginWebPage().Displayed, "OrangeHRM Website Page is not visible");
+            _loginPage.Login(username, password,logger);
+            Assert.IsTrue(new DashboardPage(driver).ValidDashboardPage().Displayed, "Dashboard is not displayed");
         }
         public static IEnumerable <TestCaseData> AddTestDataConfig()
         {
-            yield return new TestCaseData(GetDataParser().extractData("username"), GetDataParser().extractData("password"));
-            yield return new TestCaseData(GetDataParser().extractData("username_invalid"), GetDataParser().extractData("password"));
+            yield return new TestCaseData(GetDataParser().ExtractData("username"), GetDataParser().ExtractData("password"));
+            yield return new TestCaseData(GetDataParser().ExtractData("username_invalid"), GetDataParser().ExtractData("password"));
         }
     }
 }
-    

@@ -6,7 +6,7 @@ namespace OrangeHRM.utilities
 {
     public class JsonReader
     {
-        public string extractData(String tokenName)
+        public string ExtractData(String tokenName)
         {
             String myJsonString = File.ReadAllText("TestData/TestData.json");
 

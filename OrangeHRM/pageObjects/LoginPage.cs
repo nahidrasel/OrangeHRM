@@ -1,54 +1,31 @@
-﻿using OpenQA.Selenium;
-using SeleniumExtras.PageObjects;
-using System;
+﻿
+using OpenQA.Selenium;
+using OrangeHRM.PageObjects;
 
-
-namespace OrangeHRM.pageObjects
+namespace OrangeHRM.PageObjects
 {
-    public class LoginPage
+    public class LoginPage:BasePage
     {
-        private readonly IWebDriver driver;
-        public LoginPage(IWebDriver driver)
+        public LoginPage(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
-            PageFactory.InitElements(driver,this);
         }
+        private IWebElement Username => Driver.FindElement(By.Id("txtUsername"));
+        private IWebElement Password => Driver.FindElement(By.XPath("//input[@id='txtPassword']"));
+        private IWebElement LoginButton => Driver.FindElement(By.CssSelector("#btnLogin"));
+        private IWebElement LoginPageLogo => Driver.FindElement(By.XPath("//input[@id='txtPassword']"));
+        
+        //make dynamic xpath
 
-        [FindsBy(How = How.Id, Using = "txtUsername")]
-        private readonly IWebElement username;
-
-        [FindsBy(How = How.XPath, Using = "//input[@id='txtPassword']")]
-        private readonly IWebElement password;
-
-        [FindsBy(How = How.CssSelector, Using = "#btnLogin")]
-        private readonly IWebElement loginbutton;
-
-        [FindsBy(How = How.XPath, Using = "//div[@id='divLogo']//img")]
-        private readonly IWebElement loginpagelogo;
-
-        public DashboardPage ValidLogin(string userId,string pass)
+        public void Login(string userId,string pass, Logger logger)
         {
-            username.SendKeys(userId);
-            password.SendKeys(pass);
-            loginbutton.Click();
-            return new DashboardPage(driver);
+            Username.SendKeys(userId);
+            Password.SendKeys(pass);
+            LoginButton.Click();
+            logger.Info("[INFO] User logged in.");
+            //this dashboard page only reside with its page objcet
+            // login page will have only login pages functionality.
         }
-        public IWebElement LoginWebPage()
-        {
-            return loginpagelogo;
-        }
-
-        public IWebElement GetUserName()
-        {
-            return username;
-        }
-        public IWebElement GetPassword()
-        {
-            return password;
-        }
-        public IWebElement LoginButton()
-        {
-            return loginbutton;
-        }
+        
+        public IWebElement LoginWebPage() => LoginPageLogo;
     }
 }

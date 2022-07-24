@@ -6,25 +6,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrangeHRM.pageObjects
+namespace OrangeHRM.PageObjects
 {
-    public class DashboardPage
+    public class DashboardPage:BasePage
     {
+        public DashboardPage(IWebDriver driver) : base(driver)
+        {
+        }
+        private IWebElement DashboardPageLogo => Driver.FindElement(By.Id("welcome"));
 
-        private readonly IWebDriver driver;
+        /*
+        [FindsBy(How = How.Id, Using = "welcome")]
+        private readonly IWebElement dashboardPage;
+
         public DashboardPage(IWebDriver driver)
         {
             this.driver = driver;
             PageFactory.InitElements(driver, this);
         }
-
-        [FindsBy(How = How.Id, Using = "welcome")]
-        private readonly IWebElement dashboardPage;
-
-        public IWebElement ValidDashboardPage()
-        {
-            return dashboardPage;
-        }
+        */
+        public IWebElement ValidDashboardPage() => DashboardPageLogo;
 
     }
 }

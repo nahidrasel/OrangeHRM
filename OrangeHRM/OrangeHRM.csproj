@@ -41,6 +41,6 @@
   </ItemGroup>
   
   <Target Name="CopyCustomCOntent" AfterTargets="AfterBuild">
-    <Copy SourceFiles="App.config" DestinationFiles="$(OutDir)\testhost.dll.config" />
+    <Copy SourceFiles="Config\App.config" DestinationFiles="$(OutDir)\testhost.dll.config" />
   </Target>
 </Project>
