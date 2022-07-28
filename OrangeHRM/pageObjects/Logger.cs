@@ -36,12 +36,12 @@ namespace OrangeHRM.PageObjects
         {
             this.CurrentDirectory = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(this.CurrentDirectory).Parent.Parent.FullName;
-            var fileEx = projectDirectory + "/External logs/";
+            var fileExternal = projectDirectory + "/External logs/";
 
             var DatedName = $"Execution_{DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")}";
 
-            //Directory.Creat
-            FilePath = Path.Combine(fileEx, DatedName);
+            //Directory Create
+            FilePath = Path.Combine(fileExternal, DatedName);
             Directory.CreateDirectory(FilePath);
 
             this.FilePath = FilePath +"/" +"logs.txt";

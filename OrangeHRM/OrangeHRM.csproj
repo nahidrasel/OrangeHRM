@@ -39,8 +39,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="External Logs\" />
+    <Folder Include="External Reports\" />
+  </ItemGroup>
   
   <Target Name="CopyCustomCOntent" AfterTargets="AfterBuild">
-    <Copy SourceFiles="Config\App.config" DestinationFiles="$(OutDir)\testhost.dll.config" />
+    <Copy SourceFiles="Configuration\App.config" DestinationFiles="$(OutDir)\testhost.dll.config" />
   </Target>
 </Project>

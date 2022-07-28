@@ -1,5 +1,4 @@
-﻿
-using AventStack.ExtentReports;
+﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Reporter;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
@@ -28,7 +27,13 @@ namespace OrangeHRM.Tests
         {
             string workingDirectory = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-            var reportPath = projectDirectory + "//index.html";
+            var reportPath = projectDirectory + "//External Reports/index.html";
+            /*
+             var DatedLog = $"Index_{DateTime.Now.ToString("yyyy-MM-dd_HH-mm")}";
+             var filePath = Path.Combine(reportPath, DatedLog);
+             reportPath = filePath + "/index.html";
+            */
+
             var htmlReporter = new ExtentHtmlReporter(reportPath);
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
@@ -47,7 +52,6 @@ namespace OrangeHRM.Tests
             //Browser Configuration
             String browserName = ConfigurationManager.AppSettings["browser"];
             driver = InitialiseBrowser(browserName);
-
 
             LaunchSite("https://opensource-demo.orangehrmlive.com/");
             //move lauch site from basetest to other files maybe in page object model
@@ -101,16 +105,21 @@ namespace OrangeHRM.Tests
             var stackTrace = TestContext.CurrentContext.Result.StackTrace;
 
             DateTime time = DateTime.Now;
-            String fileName = "Screenshot_" + time.ToString("h_mm_ss") + ".png";
+            String fileName = "Screenshot_" + time.ToString("yyyy_MM_dd_HH_mm_ss") + ".png";
+            var  screenshotSaveLocation = "C:/nahidpractice/OrangeHRM/OrangeHRM/External Reports/";
             if (status == TestStatus.Failed)
             {
+                var bytes = CaptureScreenShot(driver, fileName);
                 reportTest.Fail("Test failed", CaptureScreenShot(driver, fileName));
                 reportTest.Log(Status.Fail, "test failed with logtrace" + stackTrace);
-
+                Screenshot image = ((ITakesScreenshot)driver).GetScreenshot();
+                image.SaveAsFile(screenshotSaveLocation+fileName);
             }
             else if (status == TestStatus.Passed)
             {
                 reportTest.Pass("Test Passed", CaptureScreenShot(driver, fileName));
+                Screenshot image = ((ITakesScreenshot)driver).GetScreenshot();
+                image.SaveAsFile(screenshotSaveLocation+fileName);
             }
             driver.Quit();
         }
@@ -120,9 +129,6 @@ namespace OrangeHRM.Tests
             ITakesScreenshot ts = (ITakesScreenshot)driver;
             var screenshot = ts.GetScreenshot().AsBase64EncodedString;
             return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot, screenShotName).Build();
-
-
-
             //use hooks and cooks 
             //also add one time teardown
             //Serial the execution one by one like as give order in the setup
