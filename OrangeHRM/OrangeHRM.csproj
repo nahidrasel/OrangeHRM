@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <Compile Remove="SimpleLoggers.cs" />
+    <Compile Remove="utilities\CustomAssertions.cs" />
   </ItemGroup>
 
   <ItemGroup>

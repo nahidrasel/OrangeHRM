@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using OrangeHRM.PageObjects;
 
-
 namespace OrangeHRM.Tests
 {
         public class LogoutTest : BaseTest
