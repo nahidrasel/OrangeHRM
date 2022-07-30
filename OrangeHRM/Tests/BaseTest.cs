@@ -28,6 +28,7 @@ namespace OrangeHRM.Tests
             string workingDirectory = Environment.CurrentDirectory;
             string projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
             var reportPath = projectDirectory + "//External Reports/index.html";
+
             /*
              var DatedLog = $"Index_{DateTime.Now.ToString("yyyy-MM-dd_HH-mm")}";
              var filePath = Path.Combine(reportPath, DatedLog);
